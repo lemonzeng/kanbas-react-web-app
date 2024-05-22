@@ -10,7 +10,6 @@ export default function Labs() {
     <div>
       <h1>Labs</h1>
       <TOC />
-      // Not sure whether the page should be like.
       <Routes>
         <Route path="/" element={<Navigate to="Lab1" />} />
         <Route path="Lab1" element={<Lab1 />} />
