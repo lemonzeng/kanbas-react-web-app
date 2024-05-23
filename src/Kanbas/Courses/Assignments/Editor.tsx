@@ -133,14 +133,30 @@ export default function AssignmentEditor() {
                     <td align="right" valign="top" style={{ paddingRight: '10px' }}>
                       <label htmlFor="wd-available-from">Available From</label>
                     </td>
-                    <td>
-                      <input type="date" id="wd-available-from" style={{ width: 'calc(50% - 5px)', marginBottom: '10px', marginRight: '10px' }} />
+                    <td style={{ padding: '0 5px' }}>
+                      <input 
+                        type="date" 
+                        id="wd-available-from" 
+                        style={{ 
+                          width: '100%', 
+                          marginBottom: '10px', 
+                          boxSizing: 'border-box' 
+                        }} 
+                      />
                     </td>
                     <td align="right" valign="top" style={{ paddingRight: '10px' }}>
                       <label htmlFor="wd-available-until">Until</label>
                     </td>
-                    <td>
-                      <input type="date" id="wd-available-until" style={{ width: 'calc(50% - 5px)', marginBottom: '10px' }} />
+                    <td style={{ padding: '0 5px' }}>
+                      <input 
+                        type="date" 
+                        id="wd-available-until" 
+                        style={{ 
+                          width: '100%', 
+                          marginBottom: '10px', 
+                          boxSizing: 'border-box' 
+                        }} 
+                      />
                     </td>
                   </tr>
                 </tbody>
