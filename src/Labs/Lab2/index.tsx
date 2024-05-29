@@ -28,6 +28,14 @@ import Tables from "./Tables";
 import ResponsiveTables from "./ResponsiveTables";
 import StylingLists from "./StylingLists";
 import StylingHyperlinksLists from "./StylingHyperllinksLists";
+import StylingForm from "./StylingForm";
+import StylingDropdowns from "./StylingDropdowns";
+import StylingSwitches from "./StylingSwitches";
+import StylingRangeAndSliders from "./StylingRangeAndSliders"
+import ResponsiveForms from "./ResponsiveForms";
+import StylingAddons from "./StylingAddons";
+import NavigatingWithTabs from "./NavigatingWithTabs";
+import NavigatingWithCards from "./NavigatingWithcards";
 export default function Lab2() {
         return (
           <div id="wd-lab2" className="container">
@@ -59,6 +67,14 @@ export default function Lab2() {
             <ResponsiveTables />
             <StylingLists />
             <StylingHyperlinksLists />
+            <StylingForm />
+            <StylingDropdowns />
+            <StylingSwitches />
+            <StylingRangeAndSliders />
+            <StylingAddons />
+            <ResponsiveForms />
+            <NavigatingWithTabs />
+            <NavigatingWithCards />
           </div>
         );
 }
