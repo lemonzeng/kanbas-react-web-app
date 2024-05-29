@@ -18,7 +18,16 @@ import FloatImages from "./FloatImages";
 import GridLayouot from "./GridLayout";
 import Flex from "./Flex";
 import ReactIconsSampler from "./ReactIconsSampler";
+
+
 import GridSystem from "./GridSystem";
+import ResponsiveGrids from "./ResponsiveGrids";
+import ResponsiveDrmaticGrids from "./ResponsiveDramaticGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import Tables from "./Tables";
+import ResponsiveTables from "./ResponsiveTables";
+import StylingLists from "./StylingLists";
+import StylingHyperlinksLists from "./StylingHyperllinksLists";
 export default function Lab2() {
         return (
           <div id="wd-lab2" className="container">
@@ -42,7 +51,14 @@ export default function Lab2() {
             <GridLayouot />
             <Flex />
             <ReactIconsSampler />
-            <GridLayouot />
+            <GridSystem />
+            <ResponsiveGrids />
+            <ResponsiveDrmaticGrids />
+            <ScreenSizeLabel />
+            <Tables />
+            <ResponsiveTables />
+            <StylingLists />
+            <StylingHyperlinksLists />
           </div>
         );
 }
