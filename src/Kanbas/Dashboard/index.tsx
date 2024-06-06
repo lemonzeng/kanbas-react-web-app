@@ -55,8 +55,8 @@ export default function Dashboard() {
       <div id="wd-dashboard-courses" className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {courses.map(course => (
           <div key={course.id} className="wd-dashboard-course col" style={{ width: "270px"}}>
-            <div className="card">
-              <img src={course.image} className="card-img-top" alt={course.title} width={200} />
+            <div className="card" style={{ height: "320px" }}>
+              <img src={course.image} className="card-img-top" alt={course.title} />
               <div className="card-body">
                 <a 
                   className="wd-dashboard-course-link"
