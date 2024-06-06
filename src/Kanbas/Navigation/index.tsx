@@ -1,7 +1,8 @@
 import React from "react";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { FaRegCircleUser } from "react-icons/fa6";
-import{ FaBook  } from "react-icons/fa";
+import { FaRegCircleUser, FaBook } from "react-icons/fa6";
+import{ LiaBookSolid  } from "react-icons/lia";
+import {IoCalendarOutline, IoMailOutline} from "react-icons/io5";
 
 export default function KanbasNavigation() {
   return (
@@ -20,11 +21,17 @@ export default function KanbasNavigation() {
           Dashboard</a>
         <a id="wd-course-link" href="#/Kanbas/Courses"className="list-group-item text-white
                    bg-black text-center border-0">
-        <FaBook  className="fs-1 text-danger" /><br />
+        <LiaBookSolid  className="fs-1 text-danger" /><br />
           Courses</a>
-       <a id="wd-calendar-link" href="#/Kanbas/Calendar">Calendar</a>
-        <a id="wd-inbox-link" href="#/Kanbas/Inbox">Inbox</a>
-        <a id="wd-labs-link" href="#/Labs">Labs</a>
+       <a id="wd-calendar-link" href="#/Kanbas/Calendar"className="list-group-item text-white bg-black text-center border-0">
+            <IoCalendarOutline className= "fs-1 text text-danger" /> <br />
+            Calendar</a>
+        <a id="wd-inbox-link" href="#/Kanbas/Inbox"className="list-group-item text-white bg-black text-center border-0">
+            <FaRegCircleUser className= "fs-1 text text-danger" /> <br />
+            Inbox</a>
+        <a id="wd-labs-link" href="#/Labs" className="list-group-item text-white bg-black text-center border-0">
+            <IoMailOutline  className= "fs-1 text text-danger" /> <br />
+            Labs</a>
     </div>
   );
 }

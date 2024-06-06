@@ -52,16 +52,24 @@ export default function Dashboard() {
       <hr />
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
-      <div id="wd-dashboard-courses">
+      <div id="wd-dashboard-courses" className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {courses.map(course => (
-          <div key={course.id} className="wd-dashboard-course">
-            <img src={course.image} width={200} alt={course.title} />
-            <div>
-              <a className="wd-dashboard-course-link" href={`#/Kanbas/Courses/${course.id}/Home`}>
-                {course.title}
-              </a>
-              <p className="wd-dashboard-course-title">{course.description}</p>
-              <a href={`#/Kanbas/Courses/${course.id}/Home`}> Go </a>
+          <div key={course.id} className="wd-dashboard-course col" style={{ width: "270px"}}>
+            <div className="card">
+              <img src={course.image} className="card-img-top" alt={course.title} width={200} />
+              <div className="card-body">
+                <a 
+                  className="wd-dashboard-course-link"
+                  href={`#/Kanbas/Courses/${course.id}/Home`}
+                  style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}
+                >
+                  {course.title}
+                </a>
+                <p className="card-text wd-dashboard-course-title">
+                  {course.description}
+                </p>
+                <a href={`#/Kanbas/Courses/${course.id}/Home`} className="btn btn-primary">Go</a>
+              </div>
             </div>
           </div>
         ))}
