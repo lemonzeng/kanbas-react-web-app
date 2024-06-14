@@ -1,22 +1,25 @@
 import "./index.css";
+import { NavLink } from "react-router-dom";
 export default function CoursesNavigation() {
-        return (
-        <div id="wd-courses-navigation"  className="list-group fs-5 rounded-0 block bg-black">
-                <a id="wd-course-home-link" href="#/Kanbas/Courses/1234/Home"
-                 className="list-group-item active border border-0">Home</a>
-                <a id="wd-course-modules-link" href="#/Kanbas/Courses/1234/Modules"
-                  className="list-group-item text-danger border border-0">Modules</a>
-                <a id="wd-course-piazza-link" href="#/Kanbas/Courses/1234/Piazza"
-                  className="list-group-item text-danger border border-0">Piazza</a>
-                <a id="wd-course-zoom-link" href="#/Kanbas/Courses/1234/Zoom"
-                  className="list-group-item text-danger border border-0">Zoom</a>
-                <a id="wd-course-quizzes-link" href="#/Kanbas/Courses/1234/Assignments"
-                  className="list-group-item text-danger border border-0">Assignments</a>
-                <a id="wd-course-assignments-link" href="#/Kanbas/Courses/1234/Quizzes"
-                  className="list-group-item text-danger border border-0">Quizzes</a>
-                <a id="wd-course-grades-link" href="#/Kanbas/Courses/1234/Grades"
-                  className="list-group-item text-danger border border-0">Grades</a>
-        </div>
-        );
+  const getNavLinkClass = ({ isActive }: { isActive: boolean }) => 
+    isActive ? "list-group-item active border-0" : "list-group-item text-danger border border-0";
+
+  return (
+    <div id="wd-courses-navigation"  className="list-group fs-5 rounded-0 ">
+      <NavLink id="wd-course-home-link" to="../Courses/1234/Home"
+        className={getNavLinkClass}>Home</NavLink>
+      <NavLink id="wd-course-modules-link" to="../Courses/1234/Modules"
+        className={getNavLinkClass}>Modules</NavLink>
+      <NavLink id="wd-course-piazza-link" to="../Courses/1234/Piazza"
+        className={getNavLinkClass}>Piazza</NavLink>
+      <NavLink id="wd-course-zoom-link" to="../Courses/1234/Zoom"
+        className={getNavLinkClass}>Zoom</NavLink>
+      <NavLink id="wd-course-quizzes-link" to="../Courses/1234/Assignments"
+        className={getNavLinkClass}>Assignments</NavLink>
+      <NavLink id="wd-course-assignments-link" to="../Courses/1234/Quizzes"
+        className={getNavLinkClass}>Quizzes</NavLink>
+      <NavLink id="wd-course-grades-link" to="../Courses/1234/Grades"
+        className={getNavLinkClass}>Grades</NavLink>
+    </div>
+  );
 }
-        
