@@ -1,4 +1,4 @@
-export default function ResponsiveDrmaticGrid() {
+export default function ResponsiveDrmaticGrids() {
   return (
     <div id="wd-bs-responsive-dramatic">
       <h2>Responsive grid system</h2>

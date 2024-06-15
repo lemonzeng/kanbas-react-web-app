@@ -21,5 +21,6 @@ export default function ResponsiveGrids() {
         </div>
       </div>
     </div>
+    
   )
 }
