@@ -1,12 +1,38 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import * as db from '../../Database';
+
 export default function GradesTable() {
-  let data = [
-    { name: "Jane Adams", setup: "100%", html: "96.67%", css: "92.18%", bootstrap: "66.22%" },
-    { name: "Christina Allen", setup: "100%", html: "100%", css: "100%", bootstrap: "100%" },
-    { name: "Samreen Ansari", setup: "100%", html: "100%", css: "100%", bootstrap: "100%" },
-    { name: "Han Bao", setup: "100%", html: "100%", css: "88.03%", bootstrap: "98.99%" },
-    { name: "Mahi Sai Srinivas Bobbili", setup: "100%", html: "96.67%", css: "98.37%", bootstrap: "100%" },
-    { name: "Siran Cao", setup: "100%", html: "100%", css: "100%", bootstrap: "100%" }
-  ];
+  const { cid } = useParams(); // 获取当前课程ID
+
+  //  map  enrolled course for current course
+  const courseEnrollments = db.enrollments.filter(enrollment => enrollment.course === cid);
+
+  //  map all students for current course
+  const students = courseEnrollments.map(enrollment => ({
+    ...db.users.find(user => user._id === enrollment.user),
+    ...enrollment
+  }));
+
+  // map all assignments for current course
+  const assignments = db.assignments.filter(assignment => assignment.course === cid);
+
+  // map grades for each student
+  const studentGrades = students.map(student => {
+    const grades = assignments.map(assignment => {
+      const gradeRecord = db.grades.find(grade => grade.student === student.user && grade.assignment === assignment._id);
+      console.log(`Grade Record for student ${student.user} and assignment ${assignment._id}:`, gradeRecord);
+      return gradeRecord ? gradeRecord.grade : "N/A";
+    });
+    return { ...student, grades };
+  });
+
+  //logs
+  // console.log("Course ID:", cid);
+  // console.log("Enrollments:", courseEnrollments);
+  // console.log("Students:", students);
+  // console.log("Assignments:", assignments);
+  // console.log("Student Grades:", studentGrades);
 
   return (
     <div className="table-responsive">
@@ -14,30 +40,18 @@ export default function GradesTable() {
         <thead className="bg-light">
           <tr>
             <th><strong>Student Name</strong></th>
-            <th>A1 SETUP</th>
-            <th>A2 HTML</th>
-            <th>A3 CSS</th>
-            <th>A4 BOOTSTRAP</th>
+            {assignments.map(assignment => (
+              <th key={assignment._id}>{assignment.title}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((student, index) => (
+          {studentGrades.map((student, index) => (
             <tr key={index}>
-              <td style={{color: 'red' }}>{student.name}</td>
-              <td>{student.setup}</td>
-              <td>{student.html}</td>
-              <td>
-                {index === 3 ? (
-                  <input
-                    type="text"
-                    className="form-control"
-                    defaultValue={student.css}
-                  />
-                ) : (
-                  student.css
-                )}
-              </td>
-              <td>{student.bootstrap}</td>
+              <td>{student.firstName} {student.lastName}</td>
+              {student.grades.map((grade, gradeIndex) => (
+                <td key={gradeIndex}>{grade}</td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -45,5 +59,3 @@ export default function GradesTable() {
     </div>
   );
 }
-
-

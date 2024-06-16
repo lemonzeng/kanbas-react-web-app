@@ -3,7 +3,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { FaRegCircleUser} from "react-icons/fa6";
 import { FaInbox } from "react-icons/fa6";
 import{ LiaBookSolid  } from "react-icons/lia";
-import {IoCalendarOutline, IoMailOutline} from "react-icons/io5";
+import {IoCalendarOutline} from "react-icons/io5";
 import { LiaCogSolid } from "react-icons/lia";
 import { Link, useLocation } from "react-router-dom";
 
@@ -18,7 +18,7 @@ export default function KanbasNavigation() {
   ];
 
   return (
-    <div id="wd-courses-navigation" className="list-group rounded-0" style={{ backgroundColor: "black", height: "100vh" }}>
+    <div id="wd-courses-navigation" className="list-group rounded-0" style={{ backgroundColor: "black", height: "100%", minHeight:"100vh" }}>
       <a id="wd-neu-link" target="_blank" 
         href="https://www.northeastern.edu/"
         className="list-group-item border-0 bg-black">
