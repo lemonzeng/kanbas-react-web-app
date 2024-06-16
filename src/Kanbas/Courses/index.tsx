@@ -5,21 +5,24 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor"
 import Grades from './Grades'; 
 import { Navigate, Route, Routes } from "react-router";
-import { useParams } from 'react-router-dom';
+import {useParams, useLocation} from "react-router-dom";
 import { FaAlignJustify } from "react-icons/fa";
 import { courses } from "../Database";
 export default function Courses() {
   const { cid } = useParams();
-  console.log(cid);
+  // console.log(cid);
   const course = courses.find((course) => course._id === cid);
-  console.log(courses);
-  console.log(course);
+  // console.log(courses);
+  // console.log(course);
+  const { pathname } = useLocation();
+  const links = ["Home", "Modules", "Piazza", "Zoom", "Assignments", "Quizzes", "Grades"];
+
 
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
         <FaAlignJustify className="me-4 fs-4 mb-1" />
-        {course && course.name}
+        {course && course.name}  &gt; {pathname.split("/")[4]}
       </h2>
       <hr />
       <div className="d-flex">
@@ -38,6 +41,6 @@ export default function Courses() {
         </div>
       </div>
     </div>
-        );
+  );
 }
         
