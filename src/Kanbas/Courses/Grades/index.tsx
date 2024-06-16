@@ -2,7 +2,6 @@ import { LuFileInput, LuFileOutput } from "react-icons/lu";
 import { FaSearch, FaCog } from 'react-icons/fa';
 import { FaFilter } from "react-icons/fa";
 import GradesTable from "./GradesTable";
-
 function Grades() {
   return (
     <div className="container mt-3">
