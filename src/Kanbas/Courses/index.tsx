@@ -8,7 +8,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { useParams } from 'react-router-dom';
 import { FaAlignJustify } from "react-icons/fa";
 import { courses } from "../Database";
-export default function Courses() {
+export default function Courses({courses} : {courses: any[];}) {
   const { cid } = useParams();
   // console.log(cid);
   const course = courses.find((course) => course._id === cid);

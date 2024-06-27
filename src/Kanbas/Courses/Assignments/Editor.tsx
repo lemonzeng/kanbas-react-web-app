@@ -7,6 +7,7 @@ export default function AssignmentEditor() {
   const assignment = db.assignments.find(a => a._id === aid);
   console.log('Found assignment:', assignment);
   if(!assignment) return <p>Assignment not found</p>;
+  
   return (
     <div className="container mt-3">
       {/* Display assignment name */}
