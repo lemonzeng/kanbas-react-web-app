@@ -1,5 +1,4 @@
 import { FaSearch, FaPlus } from 'react-icons/fa';
-
 interface AssignmentsControlsProps {
   onAddAssignment: () => void;
 }
