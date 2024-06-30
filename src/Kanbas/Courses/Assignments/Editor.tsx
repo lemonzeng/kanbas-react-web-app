@@ -1,24 +1,58 @@
-import { useParams, Link } from "react-router-dom";
-import * as db from "../../Database";
+import React, { useEffect, useState } from 'react';
+import { useParams, Link, useNavigate } from "react-router-dom";
+import {useDispatch, useSelector } from "react-redux";
+import { addAssignment, updateAssignment} from "./reducer";
 export default function AssignmentEditor() {
 
   const {cid, aid} = useParams();
-  console.log('Course ID:', cid, 'Assignment ID:', aid);
-  const assignment = db.assignments.find(a => a._id === aid);
-  console.log('Found assignment:', assignment);
-  if(!assignment) return <p>Assignment not found</p>;
+  // console.log('Course ID:', cid, 'Assignment ID:', aid);
+  // console.log('Found assignment:', assignment);
+  const assignments = useSelector((state: any) => state.assignmentsReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   
+  const [assignment, setAssignment] = useState({
+    title: '',
+    description: '',
+    points: 0,
+    dueDate: '',
+    availableDate: '',
+    availableUntil: ''
+  });
+  useEffect(() => {
+    if (aid) {
+      const existingAssignment = assignments.find((a: any) => a._id === aid);
+      if (existingAssignment) {
+        setAssignment(existingAssignment);
+      }
+    }
+  }, [aid, assignments]);
+
+  const handleSave = () => {
+    if (aid) {
+      dispatch(updateAssignment({ ...assignment, _id: aid }));
+    } else {
+      dispatch(addAssignment({ ...assignment, course: cid }));
+    }
+    navigate(`/Kanbas/Courses/${cid}/Assignments`);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setAssignment(prevState => ({ ...prevState, [name]: value }));
+  };
+
   return (
     <div className="container mt-3">
       {/* Display assignment name */}
       <div className="mb-3">
         <label htmlFor="wd-name" className="form-label ">Assignment Name</label>
-        <input type="text" className="form-control" id="wd-name" placeholder="Enter assignment name" defaultValue={assignment.title} />
+        <input type="text" className="form-control" id="wd-name" placeholder="Enter assignment name" defaultValue={assignment.title} onChange={handleChange}/>
       </div>
       {/* Display assignment description */}
       <div className="mb-3">
         <label htmlFor="wd-description" className="form-label"></label>
-        <textarea className="form-control" id="wd-description" rows={10} defaultValue={assignment.description} />
+        <textarea className="form-control" id="wd-description" rows={10} defaultValue={assignment.description} onChange={handleChange}/>
       </div>
        {/* Display points */}
       <div className="mb-3 row align-items-start">
@@ -26,7 +60,7 @@ export default function AssignmentEditor() {
           <label htmlFor="wd-points" className="form-label pt-1">Points</label>
         </div>
         <div className="col">
-          <input type="text" className="form-control" id="wd-points" defaultValue={assignment.points}/>
+          <input type="text" className="form-control" id="wd-points" defaultValue={assignment.points} onChange={handleChange}/>
         </div>
       </div>
       
@@ -124,11 +158,11 @@ export default function AssignmentEditor() {
           <div className='row mb-3'>
             <div className="col-md-6">
               <label htmlFor="wd-available-from" className="form-label mb-0" ><strong>Available From</strong></label>
-              <input type="date" className="form-control" id="wd-available-from" defaultValue={assignment.availableDate} />
+              <input type="date" className="form-control" id="wd-available-from" defaultValue={assignment.availableDate} onChange={handleChange} />
             </div>
             <div className="col-md-6">
               <label htmlFor="wd-available-until" className="form-label mb-0" ><strong>Until</strong></label>
-              <input type="date" className="form-control" id="wd-available-until" defaultValue={assignment.dueDate}/>
+              <input type="date" className="form-control" id="wd-available-until" defaultValue={assignment.dueDate} onChange={handleChange}/>
             </div>
           </div>
         </div> 
