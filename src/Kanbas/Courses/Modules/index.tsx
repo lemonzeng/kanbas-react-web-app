@@ -28,7 +28,7 @@ import * as db from "../../Database";
                     <li key={lesson._id} className="wd-lesson list-group-item p-3 ps-1">
                       <BsGripVertical className="me-2 fs-3" />
                       {lesson.name}
-                      <LessonControlButtons />
+                      {/* <LessonControlButtons /> */}
                     </li>
                   ))}
                 </ul>
