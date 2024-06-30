@@ -24,7 +24,7 @@ export default function AssignmentEditor() {
   const [assignment, setAssignment] = useState<Partial<Assignment>>({
     title: '',
     description: '',
-    points: 0,
+    points: 100,
     dueDate: '',
     availableDate: '',
     availableUntil: ''
@@ -50,6 +50,7 @@ export default function AssignmentEditor() {
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
+    
     setAssignment(prevState => ({ ...prevState, [name]: value }));
   };
 
@@ -147,21 +148,21 @@ export default function AssignmentEditor() {
         <div className='col border p-3'>
           <div className="mb-3">
             <label htmlFor="assignTo" className="form-label mb-0"><strong>Assign To</strong></label>
-            <input type="text" className="form-control" id="assignTo" name="assignTo" defaultValue={'Everyone'} onChange={handleChange} />
+            <input type="text" className="form-control" id="assignTo" name="assignTo" value={'Everyone'} onChange={handleChange} />
           </div>
           {/* Due Date and Available Date */}
           <div className="mb-3">
             <label htmlFor="wd-due-date" className="form-label mb-0"><strong>Due Date</strong></label>
-            <input type="date" className="form-control" id="dueDate" name="dueDate" defaultValue={assignment.dueDate} onChange={handleChange} />
+            <input type="date" className="form-control" id="dueDate" name="dueDate" value={assignment.dueDate} onChange={handleChange} />
           </div>
           <div className='row mb-3'>
             <div className="col-md-6">
               <label htmlFor="wd-available-from" className="form-label mb-0"><strong>Available From</strong></label>
-              <input type="date" className="form-control" id="availableFrom" name="availableFrom" defaultValue={assignment.availableDate} onChange={handleChange} />
+              <input type="date" className="form-control" id="availableFrom" name="availableDate" value={assignment.availableDate} onChange={handleChange} />
             </div>
             <div className="col-md-6">
               <label htmlFor="wd-available-until" className="form-label mb-0"><strong>Until</strong></label>
-              <input type="date" className="form-control" id="availableUntil" name="availableUntil" defaultValue={assignment.availableUntil} onChange={handleChange} />
+              <input type="date" className="form-control" id="availableUntil" name="availableUntil" value={assignment.availableUntil} onChange={handleChange} />
             </div>
           </div>
         </div> 
