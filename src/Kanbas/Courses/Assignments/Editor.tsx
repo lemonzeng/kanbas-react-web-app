@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAssignment, updateAssignment } from './reducer';
+import * as client from "./client";
 
 interface Assignment {
   _id: string;
@@ -39,18 +40,27 @@ export default function AssignmentEditor() {
     }
   }, [aid, assignments]);
 
-  const handleSave = () => {
-    if (aid) {
-      dispatch(updateAssignment({ ...assignment, _id: aid }));
-    } else {
-      dispatch(addAssignment({ ...assignment, course: cid }));
+  const handleSave = async() => {
+    if(aid){
+      try {
+        const updatedAssignment = await client.updateAssignment({ ...assignment, _id: aid });
+        dispatch(updateAssignment(updatedAssignment));
+      } catch (error) {
+        console.error('Failed to update assignment', error);
+      }
+    }else if (cid) {
+      try {
+        const newAssignment = await client.createAssignment(cid, assignment);
+        dispatch(addAssignment(newAssignment));
+      } catch (error) {
+        console.error('Failed to create assignment', error);
+      }
     }
     navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
-    const { name, value } = e.target;
-    
+    const { name, value } = e.target;    
     setAssignment(prevState => ({ ...prevState, [name]: value }));
   };
 

@@ -5,13 +5,15 @@ import SmallControlButtons from "./SmallControlButtons";
 import { BsGripVertical } from "react-icons/bs";
 import ModuleControlsButtons from "./ModuleControlButtons";
 import { useParams } from "react-router-dom";
-import{addModule, editModule, updateModule, deleteModule} from "./reducer";
+import{setModules, addModule, editModule, updateModule, deleteModule} from "./reducer";
 import {useDispatch, useSelector } from "react-redux";
+import * as client from "./client";
 export default function Modules() {
   const { cid } = useParams();
   console.log({cid});
   const [moduleName, setModuleName] = useState("");
   const {modules} = useSelector((state: any) => state.modulesReducer);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (modules && modules.length > 0) {
       console.log('Modules successfully loaded:', modules);
@@ -19,23 +21,29 @@ export default function Modules() {
       console.log('No modules found or modules not loaded yet.');
     }
   }, [modules]);
+  const removeModule = async (moduleId: string) => {
+    await client.deleteModule(moduleId);
+    dispatch(deleteModule(moduleId));
+  };
+  const createModule = async (module: any) => {
+    const newModule = await client.createModule(cid as string, module);
+    dispatch(addModule(newModule));
+  };
+  const fetchModules = async () => {
+    const modules = await client.findModulesForCourse(cid as string);
+    dispatch(setModules(modules));
+  };
+  useEffect(() => {
+    fetchModules();
+  }, []);
+
+  const saveModule = async (module: any) => {
+    const status = await client.updateModule(module);
+    dispatch(updateModule(module));
+  };
+ 
   
-  const dispath = useDispatch();
-  // const addModule = () => {
-  //   setModules([...modules, {_id: new Date().getTime().toString(),
-  //       name: moduleName, course: cid, lessons:[]
-  //   }]);
-  //   setModuleName("");
-  // };
-  // const deleteModule = (moduleId: string) => {
-  //   setModules(modules.filter((m) => m._id !== moduleId));
-  // };
-  // const editModule = (moduleId: string) => {
-  //   setModules(modules.map((m) => (m._id === moduleId ? {...m, editing: true} : m)));
-  // };
-  // const updateModule = (module: any) => {
-  //   setModules(modules.map((m) => (m._id === module._id ? module : m)));
-  // };
+ 
 
   return (
     <div>
@@ -43,9 +51,10 @@ export default function Modules() {
         <ModulesControls setModuleName={setModuleName} 
           moduleName={moduleName} 
           addModule={() => {
-            dispath(addModule({name: moduleName, course: cid}));
+            createModule({name: moduleName, course: cid});
             setModuleName("");
-          }}/><br /><br /><br /><br />
+          }}/>
+        <br /><br /><br /><br />
         <ul id="wd-modules" className="list-group rounded-0 " >
           {modules
             .filter((module:any) => module.course === cid)
@@ -56,24 +65,24 @@ export default function Modules() {
                 {!module.editing && module.name}
                 { module.editing && (
                   <input className="form-control w-50 d-incline-block"
-                          onChange={(e) => 
-                            dispath(updateModule({...module, name: e.target.value})
-                          )}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              dispath(updateModule({ ...module, editing: false }));
-                            }
-                          }}
-                          value={module.name}></input>
+                    onChange={(e) => 
+                      saveModule({...module, name: e.target.value})
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        saveModule(updateModule({ ...module, editing: false }));
+                      }
+                    }}
+                    value={module.name}></input>
                 )
                 }
                 <ModuleControlsButtons 
                   moduleId={module._id}
                   deleteModule={(moduleId) =>{
-                    dispath(deleteModule(moduleId));
+                    removeModule(moduleId);
                   }}
                   editModule={(moduleId) =>{
-                    dispath(editModule(moduleId));
+                    dispatch(editModule(moduleId));
                   }}
                   />
               </div>
