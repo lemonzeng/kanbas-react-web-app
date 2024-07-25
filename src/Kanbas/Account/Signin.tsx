@@ -12,12 +12,22 @@ export default function Signin() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const signin = async() => {
+    console.log("Signin function called");
+    console.log("Credentials:", credentials); // 打印请求的凭证信息
     try{
       const currentUser = await client.signin(credentials);
+
+      console.log("Current User:", currentUser); // 打印登录成功的用户信息
+      
       dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");
     }catch(err: any){
-      setError(err.response.data.message);
+      console.error("Signin error:", err); // 打印错误信息
+      if (err.response && err.response.data) {
+        setError(err.response.data.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   }
   return(
