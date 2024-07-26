@@ -13,6 +13,10 @@ export default function Signin() {
   const dispatch = useDispatch();
   const signin = async() => {
     console.log("Signin function called");
+    console.log('Signin button clicked');
+    console.log('Username:', credentials.username);
+    console.log('Password:', credentials.password); // 注意：在生产环境中不建议打印密码
+
     console.log("Credentials:", credentials); // 打印请求的凭证信息
     try{
       const currentUser = await client.signin(credentials);
@@ -21,15 +25,19 @@ export default function Signin() {
       
       dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");
-    }catch(err: any){
-      console.error("Signin error:", err); // 打印错误信息
-      if (err.response && err.response.data) {
-        setError(err.response.data.message);
+    }catch (error: any) {
+      console.error('Signin error:', error);
+      if (error.response) {
+        console.error('Error response data:', error.response.data);
+        if (error.response.status === 401) {
+          setError('Unauthorized: Invalid username or password');
+        }
       } else {
-        setError("An unknown error occurred");
+        console.error('Error message:', error.message);
+        setError('An error occurred. Please try again later.');
       }
     }
-  }
+  };
   return(
     <div>
       <div id="wd-signin-screen">
