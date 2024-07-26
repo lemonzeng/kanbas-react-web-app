@@ -15,7 +15,15 @@ export default function Signin() {
     console.log("Signin function called");
     console.log("Credentials:", credentials); // 打印请求的凭证信息
     try{
-      const currentUser = await client.signin(credentials);
+
+      const requestHeaders = {
+        'Authorization': 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
+        'Content-Type': 'application/json'
+      };
+      console.log("Request Headers:", requestHeaders);
+
+      const currentUser = await client.signin(credentials, requestHeaders);
+      
 
       console.log("Current User:", currentUser); // 打印登录成功的用户信息
       
