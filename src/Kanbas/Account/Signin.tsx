@@ -34,7 +34,7 @@ export default function Signin() {
     }
   }
   return(
-    <form>
+    <div>
       <div id="wd-signin-screen">
       <h1>Sign in</h1>
       <input id="wd-username" onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
@@ -45,10 +45,6 @@ export default function Signin() {
       <br />
       <Link id="wd-signup-link" to="/Kanbas/Account/Signup">Sign up</Link>
     </div>
-
-
-
-      
-    </form>
+  </div>
   )
 }
