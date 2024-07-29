@@ -13,16 +13,11 @@ export default function Signin() {
   const dispatch = useDispatch();
   const signin = async() => {
     console.log("Signin function called");
-    console.log("Credentials:", credentials); // 打印请求的凭证信息
+    console.log("Credentials:", credentials); 
     try{
 
-      const requestHeaders = {
-        'Authorization': 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
-        'Content-Type': 'application/json'
-      };
-      console.log("Request Headers:", requestHeaders);
 
-      const currentUser = await client.signin(credentials, requestHeaders);
+      const currentUser = await client.signin(credentials);
       
 
       console.log("Current User:", currentUser); // 打印登录成功的用户信息
@@ -30,7 +25,7 @@ export default function Signin() {
       dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");
     }catch(err: any){
-      console.error("Signin error:", err); // 打印错误信息
+      console.error("Signin error:", err); 
       if (err.response && err.response.data) {
         setError(err.response.data.message);
       } else {

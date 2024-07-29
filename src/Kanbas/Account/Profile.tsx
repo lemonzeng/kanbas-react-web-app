@@ -20,6 +20,13 @@ export default function Profile() {
     dispatch(setCurrentUser(null));
     navigate("/Kanbas/Account/Signin");
   };
+  const formatDate = (isoString: string | number | Date) => {
+    const date = new Date(isoString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
 
   useEffect(() => {fetchProfile();}, []);
@@ -36,12 +43,12 @@ export default function Profile() {
           onChange={(e) => setProfile({...profile, firstname: e.target.value})}/>
           <input className="wd-lastname form-control mb-2" value={profile.lastname}
           onChange={(e) => setProfile({...profile, lastname: e.target.value})}/>
-          <input className="wd-dob form-control mb-2" value={profile.dob}
+          <input className="wd-dob form-control mb-2" value={formatDate(profile.dob)}
                  onChange={(e) => setProfile({ ...profile, dob: e.target.value })} type="date"/>
           <input className="wd-email form-control mb-2" value={profile.email}
           onChange={(e) => setProfile({...profile, email: e.target.value})}  />
           <br />
-          <select className="wd-role form-control mb-2" onChange={(e) => setProfile({...profile, roel: e.target.value})}>
+          <select className="wd-role form-control mb-2" onChange={(e) => setProfile({...profile, role: e.target.value})}>
             <option value="USER">User</option>   <option value="ADMIN">Admin</option>
             <option value="FACULTY">Faculty</option>   <option value="STUDENT">Student</option>
           </select>
