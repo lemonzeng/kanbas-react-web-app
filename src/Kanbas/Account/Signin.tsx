@@ -20,7 +20,7 @@ export default function Signin() {
       const currentUser = await client.signin(credentials);
       
 
-      console.log("Current User:", currentUser); // 打印登录成功的用户信息
+      console.log("!!!Current User:", currentUser); // 打印登录成功的用户信息
       
       dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");
