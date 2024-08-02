@@ -17,6 +17,12 @@ export default function Labs() {
       <div className="container-fluid">
         <h1>Labs</h1>
         <p>Full Name: Yumeng Zeng</p>
+        <p className="fs-4 text-danger ">There is an issue with fetching the profile during deployment, which did not occur in the local environment.</p>
+        <p className="fs-4 text-danger ">Therefore, please check the assignment in the local environment and use the 
+          <h2> a6-2.0-ensuring branch  </h2>
+          as the current branch for verification.
+        </p>
+        
         <TOC />
         <Routes>
           <Route path="/" element={<Navigate to="Lab1" />} />
